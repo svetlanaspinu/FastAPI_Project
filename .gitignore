@@ -1,0 +1,6 @@
+# files that i dont want to be posted in github
+
+__pycache__
+venv/
+.env
+
