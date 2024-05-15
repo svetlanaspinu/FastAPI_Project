@@ -17,4 +17,18 @@ jobs:
             - name: pulling git repo
             # teh actually comand that need to run in the machine to pull the commande above
               uses: actions/checkout@v2  # aceasta e din codul exemplu de pe github
-#dupa ce am scris comenzile de sus ca sa commit toate am scris in terminal: 1.git add --all; 2.git commit -m "adding first github action"; 3.git push origin main.
+#dupa ce am scris comenzile de sus ca sa commit toate am scris in terminal: 1.git add --all; 2.git commit -m "adding first github action"; 3.git push (origin main - e optional).
+# dupa ce scris comenzile ontru pe repositoriul din github + Action + ai o sa imi apara primul action
+# https://github.com/marketplace?ocid=AIDcmm153qff2f_SEM__k_d615bd7e8cc21d2061dadb3afa4709d0_k_  - am setat python de pe acest link 
+            - name: install python version 3.10
+              uses: actions/setup-python@v2
+              with:
+                python-version: '3.10'
+                # updating the pip
+            - name: update pip
+              run: python -m pip install --upgrade pip
+              # install all the dependencie, and packages from requirements.txt
+            - name: install all dependencies
+              run: pip install -r requirements.txt
+#dupa ce am scris comenzile de sus ca sa commit toate am scris in terminal: 1.git add --all; 2.git commit -m "adding first github action"; 3.git push
+
