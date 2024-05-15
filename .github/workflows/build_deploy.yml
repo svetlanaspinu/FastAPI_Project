@@ -11,17 +11,20 @@ on: [push, pull_request] # this trigger the workflow
 # creating a job
 jobs: 
     job1:
+      # inserez secret environment-ul din github
+        environment:
+          name: Testing
       # setup the environment variable/ if i insertiti here is only for the job 1, if i inserted abive the jobs - it will affetc all the jobs
         env:
-          DATABASE_HOSTNAME: localhost
-          DATABASE_PORT: 5432
-          DATABASE_PASSWORD: password456
-          DATABASE_NAME: FastAPI_Project
-          DATABASE_USERNAME: postgres
-          SECRET_KEY: 09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
-          ALGORITHM: HS256
-          ACCESS_TOKEN_EXPIRE_MINUTES: 30
-           
+          DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}} # inserat repositoriul secret
+          DATABASE_PORT: ${{secrets.DATABASE_PORT}}
+          DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+          DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+          DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
+          SECRET_KEY: ${{secrets.SECRET_KEY}}
+          ALGORITHM: ${{secrets.ALGORITHM}}
+          ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
+
         # specifying the os for the virtual machine to run the ci/cd
         runs-on: windows-2022
         # providibg the list of steps
