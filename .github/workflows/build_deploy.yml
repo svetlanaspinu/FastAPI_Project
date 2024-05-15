@@ -1,0 +1,20 @@
+ # this is a yml file. working in yml file
+
+# informatie desper comenzi: https://docs.github.com/en/actions/using-workflows/triggering-a-workflow
+
+name: Build and Deploy code
+
+on: [push, pull_request] # this trigger the workflow
+
+# creating a job
+jobs: 
+    job1:
+        # specifying the os for the virtual machine to run the ci/cd
+        runs-on: windows-2022
+        # providibg the list of steps
+        steps:
+            #giving a name and a comand for every step/ toata informatia asta e si pe linkul mentionat mai sus/ sa verifi ce inseamna un job, un step si cum functioneaza
+            - name: pulling git repo
+            # teh actually comand that need to run in the machine to pull the commande above
+              uses: actions/checkout@v2  # aceasta e din codul exemplu de pe github
+#dupa ce am scris comenzile de sus ca sa commit toate am scris in terminal: 1.git add --all; 2.git commit -m "adding first github action"; 3.git push origin main.
