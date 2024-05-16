@@ -25,6 +25,22 @@ jobs:
           ALGORITHM: ${{secrets.ALGORITHM}}
           ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
 
+          # Creating PostgreSQL service containers: connectig the test wirh PgAdmin:
+        services:
+          postgres:
+            image: postgres
+            env:
+              POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+              POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test
+            ports:
+              - 5432:5432
+          # Set health checks to wait until postgres has started/ link: https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers
+            options: >-
+              --health-cmd pg_isready
+              --health-interval 10s
+              --health-timeout 5s
+              --health-retries 5
+
         # specifying the os for the virtual machine to run the ci/cd
         runs-on: windows-2022
         # providibg the list of steps
