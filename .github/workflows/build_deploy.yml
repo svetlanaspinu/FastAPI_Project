@@ -7,10 +7,10 @@ name: Build and Deploy code
 on: [push, pull_request] # this trigger the workflow
 
 
-
+   ## Staring the CI - Continous Integration
 # creating a job
 jobs: 
-    job1:
+    build:
       # inserez secret environment-ul din github
         environment:
           name: Testing
@@ -25,21 +25,6 @@ jobs:
           ALGORITHM: ${{secrets.ALGORITHM}}
           ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
 
-          # Creating PostgreSQL service containers: connectig the test wirh PgAdmin:
-        services:
-          postgres:
-            image: postgres
-            env:
-              POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
-              POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test
-            ports:
-              - 5432:5432
-          # Set health checks to wait until postgres has started/ link: https://docs.github.com/en/actions/using-containerized-services/creating-postgresql-service-containers
-            options: >-
-              --health-cmd pg_isready
-              --health-interval 10s
-              --health-timeout 5s
-              --health-retries 5
 
         # specifying the os for the virtual machine to run the ci/cd
         runs-on: windows-2022
@@ -73,3 +58,18 @@ jobs:
 
             - name: say hi to svetlana
               run: print "hello svetlana"
+      ## End the CI - Continous Integration
+
+       ## Staring the CD - Continous Delivery
+
+# job name
+    deploy:
+      runs-on: windows-2022
+  # ci/cd run in parallel/ using needs - to say to cd to wait for ci to run first/ in [] - este notat job din CI
+      needs: [build]
+      steps: 
+        - name: deploiyng stuff
+          run: print "going to deploy firts CD"
+# dupa aceasta iarasi run the commands pt a connecta cu github
+
+      
